@@ -1,0 +1,45 @@
+Day 3_____________________________Beauty of Strings Leetcode solution
+Question Link  https://leetcode.com/problems/sum-of-beauty-of-all-substrings/submissions/1085442793/
+
+class Solution {
+    public int  Most_frequent_Minus_least_frequence_characters(HashMap<Character,Integer> hs)
+    {
+        int least_freq=1000000;
+        int most_freq=0;
+        for(Character c:hs.keySet())
+        {
+            if(hs.get(c)>most_freq)
+            {
+                most_freq=hs.get(c);
+            }
+            if(hs.get(c)<least_freq)
+            {
+                least_freq=hs.get(c);
+            }
+        }
+       // System.out.println(most_freq);
+        return most_freq-least_freq;
+    }
+    public int beautySum(String s) {
+        int ans=0;
+        for(int i=0;i<s.length();i++)
+        {
+            HashMap<Character,Integer> hs=new HashMap<Character,Integer>();
+            hs.put(s.charAt(i),1);
+            for(int j=i+1;j<s.length();j++)
+            {
+               Character c=s.charAt(j);
+                if(hs.containsKey(c))
+                {
+                    hs.put(c,hs.get(c)+1);
+                }
+                else
+                {
+                    hs.put(c,1);
+                }
+                ans+=Most_frequent_Minus_least_frequence_characters(hs);        
+            }
+        }
+        return ans;
+    }
+}
